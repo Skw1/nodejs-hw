@@ -5,7 +5,6 @@ const noteSchema = new Schema(
     title: {
       type: String,
       required: true,
-      default: '',
       trim: true,
     },
     content: {
