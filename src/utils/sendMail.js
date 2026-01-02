@@ -8,19 +8,18 @@ const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASSWORD,
   },
-  tls: {
-    rejectUnauthorized: false,
-  },
 });
 
-await transporter.verify();
-console.log('SMTP connection OK');
-
 export const sendMail = async ({ to, subject, html }) => {
-  return transporter.sendMail({
-    from: `"Support" <${process.env.SMTP_FROM}>`,
-    to,
-    subject,
-    html,
-  });
+  try {
+    return await transporter.sendMail({
+      from: `"Support" <${process.env.SMTP_FROM}>`,
+      to,
+      subject,
+      html,
+    });
+  } catch (error) {
+    console.error('SMTP ERROR 👉', error.message);
+    throw error;
+  }
 };
