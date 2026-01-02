@@ -19,7 +19,7 @@ export const sendMail = async ({ to, subject, html }) => {
       html,
     });
   } catch (error) {
-    console.error('SMTP ERROR 👉', error.message);
+    console.error('SMTP ERROR', error.message);
     throw error;
   }
 };
